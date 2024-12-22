@@ -1,23 +1,25 @@
 package store
 
+import "time"
+
 type Workout struct {
 	Id        int64     `json:"id"`
 	Exercises []Action  `json:"exercises"`
 	Date      time.Time `json:"date_modified"`
 }
 
-func (Workout *w) GetAll() []Workout {
-
+func (w* Workout) GetAll() []Workout {
+    return []Workout{}
 }
 
-func (Workout *w) Get(id int) Workout {
-
+func (w* Workout) Get(id int) Workout {
+    return Workout{}
 }
 
-func (Workout *w) Update(id int) err {
+func (w* Workout) Update(id int) error {
 	return nil
 }
 
-func (Workout *w) Delete(id int) err {
+func (w* Workout) Delete(id int) error {
 	return nil
 }

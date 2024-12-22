@@ -1,21 +1,32 @@
 package store
 
-import "time"
+import (
+	"net/http"
+	"time"
+)
 
 type Store struct {
-	Exercises []Exercise `json:"exercises"`
-	Workouts  []Workout  `json:"workouts"`
-	Updated   time.Time  `json:"date_modified"`
+	Exercises Exercises `json:"store_exercises"`
+	Workouts  []Workout `json:"workouts"`
+	Updated   time.Time `json:"updated"`
 }
 
-func (Store *s) Get() Store {
-
+type Crud interface {
+	GetAll() ([]byte, error)
+	Get() ([]byte, error)
+	Create(r *http.Request) error
+	Update(int64, r *http.Request) error
+	Delete(int64) error
 }
 
-func (Store *s) Update(id int) err {
+func (s *Store) Get() Store {
+	return Store{}
+}
+
+func (s *Store) Update(id int) error {
 	return nil
 }
 
-func (Store *s) Delete(id int) err {
+func (s *Store) Delete(id int) error {
 	return nil
 }

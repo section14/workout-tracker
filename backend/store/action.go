@@ -7,18 +7,18 @@ type Action struct {
 	Reps     int64    `json:"reps"`
 }
 
-func (Action *a) GetAll() []Action {
-
+func (a* Action) GetAll() []Action {
+    return []Action{}
 }
 
-func (Action *a) Get(id int) Action {
-
+func (a* Action) Get(id int) Action {
+    return Action{}
 }
 
-func (Action *a) Update(id int) err {
+func (a* Action) Update(id int) error {
 	return nil
 }
 
-func (Action *a) Delete(id int) err {
+func (a* Action) Delete(id int) error {
 	return nil
 }

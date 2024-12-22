@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Pages from './pages/Pages'
-import './App.css'
 
 const App = () => {
     const [page, setPage] = useState('workouts')

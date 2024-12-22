@@ -1,4 +1,6 @@
-const api_url = `localhost:8080/api/`
+import axios from 'axios'
+
+const api_url = `http://localhost:8080/`
 
 ///////////////////////////////////////////////////////////
 // GET based requests                                    //
@@ -7,7 +9,7 @@ const api_url = `localhost:8080/api/`
 export const GetAll = async (url) => {
     return new Promise((resolve, reject) => {
         axios
-            .get(`${api_url}${url}/create`)
+            .get(`${api_url}${url}`)
             .then((res) => {
                 return resolve(res.data)
             })

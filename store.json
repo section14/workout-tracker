@@ -1,0 +1,12 @@
+{
+    "store_exercises": {
+        "exercises": [
+            {"id": 1, "name": "Bench Press"},
+            {"id": 2, "name": "Incline Bench"},
+            {"id": 3, "name": "Bent Over Row"},
+            {"id": 4, "name": "Squat"}
+        ]
+    },
+    "workouts": [],
+    "updated": "2024-12-21 20:21:44.735981 -0500 EST m=+0.000667584"
+}
