@@ -1,0 +1,43 @@
+:root {
+    --light-gray: #b0b0b0;
+    --med-gray: #ccc;
+    --primary: #2761FF;
+    --secondary: #FF6827;
+    --space-2: 0.375rem;
+    --space-3: 0.5rem;
+    --space-4: 0.75rem;
+    --space-5: 1.0rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin: 0;
+    padding: 0;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-rows: 100vh;
+    grid-template-columns: 20vw 80vw;
+}
+
+.nav {
+    background-color: var(--med-gray);
+    padding: var(--space-4);
+}
+
+.content {
+    padding: var(--space-4);
+}
