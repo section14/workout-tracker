@@ -13,18 +13,8 @@ type Exercise struct {
 }
 
 type Exercises struct {
-    Exercises []Exercise `json:"exercises"`
+	Exercises []Exercise `json:"exercises"`
 }
-
-/*
-type Crud interface {
-    GetAll() ([]byte, error)
-    Get() ([]byte, error)
-    Create(r *http.Request) error
-    Update(int64, r *http.Request) error
-    Delete(int64) error
-}
-*/
 
 func (e *Exercises) GetAll() ([]byte, error) {
 	var empty []byte
@@ -93,13 +83,13 @@ func (e *Exercises) Update(id int64, r *http.Request) error {
 		}
 	}
 
-    e.Exercises = slices.Replace(e.Exercises, idx, idx+1, ex)
+	e.Exercises = slices.Replace(e.Exercises, idx, idx+1, ex)
 
 	return nil
 }
 
 func (e *Exercises) Delete(id int64) error {
-    var idx int
+	var idx int
 
 	for i, es := range e.Exercises {
 		if id == es.Id {
@@ -107,7 +97,7 @@ func (e *Exercises) Delete(id int64) error {
 		}
 	}
 
-    e.Exercises = slices.Delete(e.Exercises, idx, idx+1)
+	e.Exercises = slices.Delete(e.Exercises, idx, idx+1)
 
-    return nil
+	return nil
 }

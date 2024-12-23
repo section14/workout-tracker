@@ -1,5 +1,5 @@
 {
-    "storeExercises": {
+    "store_exercises": {
         "exercises": [
             {"id": 1, "name": "Bench Press"},
             {"id": 2, "name": "Incline Bench"},
@@ -7,27 +7,27 @@
             {"id": 4, "name": "Squat"}
         ]
     },
-    "storeWorkouts": {
+    "store_workouts": {
         "workouts": [
             {
             "id": 1,
-            "workoutActions": {
+            "workout_actions": {
                 "actions": [
                     {
                         "id": 1,
-                        "exerciseId": 1,
+                        "exercise_id": 1,
                         "sets": 3,
                         "reps": 8
                     },
                     {
                         "id": 2,
-                        "exerciseId": 2,
+                        "exercise_id": 2,
                         "sets": 3,
                         "reps": 6
                     },
                     {
                         "id": 3,
-                        "exerciseId": 3,
+                        "exercise_id": 3,
                         "sets": 2,
                         "reps": 5
                     }

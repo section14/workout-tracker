@@ -38,7 +38,6 @@ const Exercise = ({ id, name }) => {
         })
     }, [state])
 
-
     return (
         <div>
             <div style={{ display: 'inline-flex' }}>

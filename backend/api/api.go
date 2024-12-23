@@ -16,9 +16,10 @@ import (
 
 // reference to global datastore
 var DataStore store.Store
+var storeName string
 
 func LoadStore() error {
-	storeName := os.Args[1]
+	storeName = os.Args[1]
 
 	date := time.Now()
 	log.Println(date)
@@ -37,7 +38,7 @@ func LoadStore() error {
 		//return store.Store{}, decodeErr
 	}
 
-    log.Println(DataStore)
+    file.Close()
 
 	//validate and parse supplied JSON file
 	/*
@@ -51,6 +52,10 @@ func LoadStore() error {
 }
 
 func handlers(mux *http.ServeMux) {
+	mux.HandleFunc("GET /save", save)
+
+    mux.HandleFunc("GET /workouts", getWorkouts)
+
 	mux.HandleFunc("GET /exercises", getExercises)
 	mux.HandleFunc("GET /exercise/{id}", getExercise)
     mux.HandleFunc("POST /exercise", createExercise)
@@ -92,6 +97,30 @@ func Serve() {
 	//http.ListenAndServe(":8080", mux)
 }
 
+func save(w http.ResponseWriter, r *http.Request) {
+    file, err := json.MarshalIndent(DataStore, "", " ")
+	if err != nil {
+		fmt.Printf("couldn't save JSON: %s", storeName)
+    }
+
+    err = os.WriteFile(storeName, file, 0644)
+	if err != nil {
+		fmt.Printf("couldn't write JSON save: %s", storeName)
+    }
+}
+
+//workouts
+func getWorkouts(w http.ResponseWriter, r *http.Request) {
+	res, err := DataStore.Workouts.GetAll()
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusNotFound)
+    }
+	w.Write(res)
+}
+
+
+//exercies
 func getExercises(w http.ResponseWriter, r *http.Request) {
 	res, err := DataStore.Exercises.GetAll()
     if err != nil {

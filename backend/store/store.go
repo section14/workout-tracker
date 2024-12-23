@@ -6,8 +6,8 @@ import (
 )
 
 type Store struct {
-	Exercises Exercises `json:"store_exercises"`
-	Workouts  []Workout `json:"workouts"`
+	Exercises Exercises `json:"storeExercises"`
+	Workouts  Workouts `json:"storeWorkouts"`
 	Updated   time.Time `json:"updated"`
 }
 
