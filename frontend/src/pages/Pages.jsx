@@ -1,7 +1,7 @@
 import Exercises from './Exercises'
 import Workouts from './Workouts'
 
-const Pages = ({page}) => {
+const Pages = ({ page }) => {
     let Page = null
 
     switch (page) {

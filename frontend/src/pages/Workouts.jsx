@@ -11,22 +11,22 @@ const Action = ({ action, onChange }) => {
                     exerciseId: action.payload.exerciseId,
                     sets: action.payload.sets,
                     reps: action.payload.reps,
-                    available: true
+                    available: true,
                 }
             case 'set-id':
                 return {
                     ...state,
-                    exerciseId: action.payload
+                    exerciseId: action.payload,
                 }
             case 'set-set':
                 return {
                     ...state,
-                    sets: action.payload
+                    sets: action.payload,
                 }
             case 'set-rep':
                 return {
                     ...state,
-                    reps: action.payload
+                    reps: action.payload,
                 }
         }
     }
@@ -42,13 +42,13 @@ const Action = ({ action, onChange }) => {
     const changeValue = (type, val) => {
         switch (type) {
             case 'id':
-                actionDispatch({ type: 'set-id', payload: val })
+                actionDispatch({ type: 'set-id', payload: parseInt(val) })
                 break
             case 'set':
-                actionDispatch({ type: 'set-set', payload: val })
+                actionDispatch({ type: 'set-set', payload: parseInt(val) })
                 break
             case 'rep':
-                actionDispatch({ type: 'set-rep', payload: val })
+                actionDispatch({ type: 'set-rep', payload: parseInt(val) })
                 break
         }
     }
@@ -59,50 +59,93 @@ const Action = ({ action, onChange }) => {
 
     useEffect(() => {
         const { id, exerciseId, sets, reps } = action
-        actionDispatch({ type: 'set-all', payload: { id, exerciseId, sets, reps } })
+        actionDispatch({
+            type: 'set-all',
+            payload: { id, exerciseId, sets, reps },
+        })
     }, [action])
 
     return data.available ? (
         <div>
             <ExerciseSelect selected={data.exerciseId} onChange={(e) => changeValue('id', e)} />
             <label htmlFor='reps'>Sets</label>
-            <input name='reps' type='text' value={data.sets} onChange={(e) => changeValue('set', e.target.value)} />
+            <input
+                name='reps'
+                type='text'
+                value={data.sets}
+                onChange={(e) => changeValue('set', e.target.value)}
+            />
             <label htmlFor='reps'>Reps</label>
-            <input name='reps' type='text' value={data.reps} onChange={(e) => changeValue('rep', e.target.value)} />
+            <input
+                name='reps'
+                type='text'
+                value={data.reps}
+                onChange={(e) => changeValue('rep', e.target.value)}
+            />
         </div>
     ) : null
 }
 
 const Actions = ({ actions }) => {
     const onChange = (data) => {
-        console.log("data: ", data)
+        console.log('data: ', data)
+    }
+
+    const addAction = () => {
+
     }
 
     return (
         <>
-            {actions.map((a) => (
-                <Action key={a.id} action={a} onChange={onChange} />
-            ))}
+            {actions && actions.length > 0 ? (
+                actions.map((a) => (
+                    <Action key={a.id} action={a} onChange={onChange} />
+                ))
+            ) : null}
+            <button type='button' onClick={addAction}>Add Exercise</button>
         </>
     )
+}
+
+const DateTime = ({ date }) => {
+    const d = new Date(date)
+    const str = `${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}`
+
+    return <div>{str}</div>
 }
 
 const Workouts = ({ }) => {
     const [workouts, setWorkouts] = useState([])
 
     useEffect(() => {
-        GetAll('workouts').then((res) => {
-            setWorkouts(res)
-        }).catch((err) => {
-            console.log("workouts err: ", err)
-        })
+        GetAll('workouts')
+            .then((res) => {
+                setWorkouts(res)
+            })
+            .catch((err) => {
+                console.log('workouts err: ', err)
+            })
     }, [])
+
+    const create = () => {
+        GetAll('workouts/create')
+            .then((res) => {
+                setWorkouts(res)
+            })
+            .catch((err) => {
+                console.log('workouts err: ', err)
+            })
+    }
 
     return workouts.length > 0 ? (
         <>
             {workouts.map((w) => (
-                <Actions key={w.id} actions={w.workoutActions.actions} />
+                <div key={w.id}>
+                    <DateTime date={w.date} />
+                    <Actions actions={w.workoutActions.actions} />
+                </div>
             ))}
+            <button type='button' onClick={create}>Add Workout</button>
         </>
     ) : null
 }

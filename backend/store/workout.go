@@ -50,9 +50,10 @@ func (w *Workouts) Create(r *http.Request) error {
 	length := len(w.Workouts)
 	newId := w.Workouts[length-1].Id + 1
 
+    /*
 	type Temp struct {
-		Actions Actions   `json:"workout_actions"`
-		Date    time.Time `json:"date_modified"`
+		Actions Actions   `json:"workoutActions"`
+		Date    time.Time `json:"date"`
 	}
 
 	var t Temp
@@ -62,8 +63,9 @@ func (w *Workouts) Create(r *http.Request) error {
 	if err != nil {
 		return err
 	}
+    */
 
-	wo := Workout{Id: newId, Actions: t.Actions, Date: t.Date}
+	wo := Workout{Id: newId, Actions: Actions{}, Date: time.Now()}
 	w.Workouts = append(w.Workouts, wo)
 
 	return nil

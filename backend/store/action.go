@@ -61,8 +61,9 @@ func (a *Actions) Create(r *http.Request) error {
 	length := len(a.Actions)
 	newId := a.Actions[length-1].Id + 1
 
+    /*
 	type Temp struct {
-		ExerciseId int64 `json:"exercise_id"`
+		ExerciseId int64 `json:"exerciseId"`
 		Sets       int64 `json:"sets"`
 		Reps       int64 `json:"reps"`
 	}
@@ -74,8 +75,9 @@ func (a *Actions) Create(r *http.Request) error {
 	if err != nil {
 		return err
 	}
+    */
 
-	ac := Action{Id: newId, ExerciseId: t.ExerciseId, Sets: t.Sets, Reps: t.Reps}
+	ac := Action{Id: newId, ExerciseId: 1, Sets: 0, Reps: 0}
 	a.Actions = append(a.Actions, ac)
 
 	return nil

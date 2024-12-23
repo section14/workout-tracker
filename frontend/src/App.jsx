@@ -7,7 +7,7 @@ const App = () => {
 
     const save = () => {
         GetAll('save').catch((err) => {
-            console.log("save error: ", err)
+            console.log('save error: ', err)
         })
     }
 
@@ -15,14 +15,20 @@ const App = () => {
         <div className='app-grid'>
             <nav className='nav'>
                 <div>
-                    <button type='button' onClick={save}>Save</button>
+                    <button type='button' onClick={save}>
+                        Save
+                    </button>
                 </div>
                 <ul>
                     <li>
-                        <button type='button' onClick={() => setPage('exercises')}>Exercises</button>
+                        <button type='button' onClick={() => setPage('exercises')}>
+                            Exercises
+                        </button>
                     </li>
                     <li>
-                        <button type='button' onClick={() => setPage('workouts')}>Workouts</button>
+                        <button type='button' onClick={() => setPage('workouts')}>
+                            Workouts
+                        </button>
                     </li>
                 </ul>
             </nav>

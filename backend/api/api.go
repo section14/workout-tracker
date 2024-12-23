@@ -55,6 +55,8 @@ func handlers(mux *http.ServeMux) {
 	mux.HandleFunc("GET /save", save)
 
     mux.HandleFunc("GET /workouts", getWorkouts)
+    mux.HandleFunc("GET /workouts/create", createWorkout)
+    mux.HandleFunc("GET /workouts/action/create", createAction)
 
 	mux.HandleFunc("GET /exercises", getExercises)
 	mux.HandleFunc("GET /exercise/{id}", getExercise)
@@ -119,6 +121,46 @@ func getWorkouts(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+func createWorkout(w http.ResponseWriter, r *http.Request) {
+    err := DataStore.Workouts.Create(r)
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusNotFound)
+    }
+
+	res, err := DataStore.Workouts.GetAll()
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusNotFound)
+    }
+	w.Write(res)
+}
+
+func createAction(w http.ResponseWriter, r *http.Request) {
+    //you need to get a workout id in this method. Then,
+    //create a new Action object, and append it to
+    //the individual workout
+    //
+    //so get the workout directly, below is marshalled already
+
+    //Orrr, just add an AddAction to Workouts, and forget about it
+    //return updated json as a convenience
+
+    wo,_ := DataStore.Workouts.Get(1)
+
+    err := DataStore.Workouts.Create(r)
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusNotFound)
+    }
+
+	res, err := DataStore.Workouts.GetAll()
+    if err != nil {
+        log.Println(err)
+        w.WriteHeader(http.StatusNotFound)
+    }
+	w.Write(res)
+}
 
 //exercies
 func getExercises(w http.ResponseWriter, r *http.Request) {
@@ -161,7 +203,7 @@ func updateExercise(w http.ResponseWriter, r *http.Request) {
         log.Println(err)
         w.WriteHeader(http.StatusNotFound)
     }
-    
+
     w.WriteHeader(http.StatusOK)
 }
 
